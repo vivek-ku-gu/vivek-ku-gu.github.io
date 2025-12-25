@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayas Chess Academy | Contact</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="logo-area">
+        <div class="logo-icon">
+            <span class="knight-head"></span>
+        </div>
+        <div class="logo-text">
+            <h1>PRAYAS</h1>
+            <p>Chess Academy</p>
+        </div>
+    </div>
+    <nav class="main-nav">
+        <div class="nav-toggle" id="navToggle">
+            <span></span><span></span><span></span>
+        </div>
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <h2>Contact & Enrolment</h2>
+    <p>Share your details and the team will get back with batch options and timings.</p>
+</section>
+
+<section class="section-padding contact-section">
+    <div class="contact-grid">
+        <div>
+            <h3>Get in Touch</h3>
+            <p><strong>Phone/WhatsApp:</strong> <a href="tel:+919938011913">+91 99380 11913</a></p>
+            <p><strong>Address:</strong> K7-720, Near IGKC Hospital, Kalinganagar, Bhubaneswar</p>
+            <p>Fill the form to receive a callback and detailed fee structure.</p>
+        </div>
+
+        <div>
+            <!-- Simple mailto-based form -->
+            <form id="contactForm"
+                  action="mailto:academy@example.com"
+                  method="POST"
+                  enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Student Name *</label>
+                    <input type="text" id="name" name="Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" name="Age" min="4" max="80" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">Occupation / School Name *</label>
+                    <input type="text" id="occupation" name="Occupation_or_School" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <textarea id="address" name="Address" rows="2" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="Phone" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Additional Details (optional)</label>
+                    <textarea id="message" name="Additional_Details" rows="3"
+                              placeholder="Preferred batch, experience level, etc."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Details</button>
+                <p class="form-note">
+                    By submitting, you agree to be contacted via phone or email regarding batches.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <p>PRAYAS Chess Academy, K7-720, Near IGKC Hospital, Kalinganagar, Bhubaneswar</p>
+    <p>Call: <a href="tel:+919938011913">+91 99380 11913</a></p>
+    <p>&copy; <span id="year"></span> Prayas Chess Academy. All rights reserved.</p>
+</footer>
+</body>
+</html>
