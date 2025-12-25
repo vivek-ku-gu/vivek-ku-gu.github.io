@@ -23,17 +23,54 @@ if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
 
-// Optional: basic client‑side validation feedback on contact form
+// Client-side submission to a Formspree endpoint (no mail client required)
+// IMPORTANT: Replace the placeholder below with your Formspree endpoint, e.g. 'https://formspree.io/f/abcd1234'
+const FORMSPREE_URL = 'https://formsubmit.co/ajax/prayaschessacademy@gmail.com';
+
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const statusDiv = document.getElementById('formStatus');
+
+    contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
         if (!contactForm.checkValidity()) {
-            e.preventDefault();
             contactForm.reportValidity();
-        } else {
-            // For mailto forms it is better UX to show a small message
-            alert("Your details will be prepared in your email app. Please press send to complete the enquiry.");
+            return;
+        }
+
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        statusDiv.textContent = '';
+        statusDiv.className = 'form-status';
+
+        const formData = new FormData(contactForm);
+
+        try {
+            const resp = await fetch(FORMSPREE_URL, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (resp.ok) {
+                statusDiv.className = 'form-status success';
+                statusDiv.textContent = '✅ Thank you — your details were submitted. We will contact you soon.';
+                contactForm.reset();
+            } else {
+                const data = await resp.json().catch(() => ({}));
+                throw new Error(data.error || 'Form submission failed');
+            }
+            } catch (err) {
+                statusDiv.className = 'form-status error';
+                statusDiv.innerHTML = '⚠️ There was a problem submitting the form. Please try again later or email us at <a href="mailto:youremail@example.com">youremail@example.com</a>.';
+                console.error('Form submit error:', err);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
     });
 }

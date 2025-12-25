@@ -45,11 +45,9 @@
         </div>
 
         <div>
-            <!-- Simple mailto-based form -->
-            <form id="contactForm"
-                  action="mailto:vivek020199@gmail.com"
-                  method="POST"
-                  enctype="text/plain">
+            <!-- Form submits directly via JS (replace the FORMSPREE_URL in js/main.js with your Formspree endpoint) -->
+            <form id="contactForm" method="POST">
+                <input type="hidden" name="_subject" value="Student details for Prayas Chess Academy">
                 <div class="form-group">
                     <label for="name">Student Name *</label>
                     <input type="text" id="name" name="Name" required>
@@ -77,7 +75,8 @@
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="Email">
+                    <!-- FormSubmit expects the email field to be named "email" -->
+                    <input type="email" id="email" name="email">
                 </div>
 
                 <div class="form-group">
@@ -90,6 +89,7 @@
                 <p class="form-note">
                     By submitting, you agree to be contacted via phone or email regarding batches.
                 </p>
+                <div id="formStatus" class="form-status" aria-live="polite"></div>
             </form>
         </div>
     </div>
