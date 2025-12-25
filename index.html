@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0b0b0b;
+      --white: #ffffff;
+      --gold: #c9a24d;
+      --gray: #d6d6d6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .hero {
+      padding-top: 6rem;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 6px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      max-width: 800px;
+      color: var(--gray);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 4px;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      max-width: 600px;
+      display: grid;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      background: #111;
+      border: 1px solid #333;
+      color: var(--white);
+      border-radius: 4px;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    button {
+      padding: 0.8rem;
+      background: var(--gold);
+      border: none;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Chess Academy</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <!-- Replace banner.jpg with your 2500x950 banner image -->
+  <img src="banner.jpg" alt="Chess Academy Banner">
+</section>
+
+<section id="about" class="about">
+  <h2>About Our Academy</h2>
+  <p>
+    Our Chess Academy is dedicated to building strong analytical minds through structured chess training. 
+    We focus on discipline, strategy, and competitive excellence for students of all ages.
+  </p>
+</section>
+
+<section class="gallery">
+  <!-- Replace image paths with your portrait photos -->
+  <img src="student1.jpg" alt="Students playing chess">
+  <img src="student2.jpg" alt="Students playing chess">
+  <img src="student3.jpg" alt="Students playing chess">
+  <img src="student4.jpg" alt="Students playing chess">
+</section>
+
+<section id="contact">
+  <h2>Contact & Enquiry</h2>
+
+  <!-- Use Formspree / EmailJS / backend to send to your email -->
+  <form action="https://formspree.io/f/yourFormID" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="number" name="age" placeholder="Age" required>
+    <input type="text" name="occupation" placeholder="Occupation / School Name" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 Chess Academy. All rights reserved.
+</footer>
+
+</body>
+</html>
