@@ -45,8 +45,10 @@
         </div>
 
         <div>
-            <!-- Form submits directly via JS (replace the FORMSPREE_URL in js/main.js with your Formspree endpoint) -->
-            <form id="contactForm" method="POST">
+            <!-- Form submits directly via JS. Use the FormSubmit activation token you received via email: -->
+            <!-- 1) Click "Activate Form" in the email from FormSubmit OR copy the random string it provides. -->
+            <!-- 2) Replace REPLACE_WITH_YOUR_TOKEN below with that string (keep /ajax/ in place). -->
+            <form id="contactForm" method="POST" action="https://formsubmit.co/ajax/76794377953d50485b51595a6f55bb71">
                 <input type="hidden" name="_subject" value="Student details for Prayas Chess Academy">
                 <div class="form-group">
                     <label for="name">Student Name *</label>

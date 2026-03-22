@@ -23,13 +23,16 @@ if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
 
-// Client-side submission to a Formspree endpoint (no mail client required)
-// IMPORTANT: Replace the placeholder below with your Formspree endpoint, e.g. 'https://formspree.io/f/abcd1234'
-const FORMSPREE_URL = 'https://formsubmit.co/ajax/prayaschessacademy@gmail.com';
+// Client-side submission to a FormSubmit endpoint (no mail client required).
+// IMPORTANT: Update the form's action attribute to use the FormSubmit activation token you received by email.
+// Example action: https://formsubmit.co/ajax/abcd1234
+const DEFAULT_FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/76794377953d50485b51595a6f55bb71 ';
 
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
+    // Prefer the action attribute (so you can edit the token directly in HTML). If missing, use the placeholder.
+    const FORMSPREE_URL = contactForm.getAttribute('action') || DEFAULT_FORMSUBMIT_ENDPOINT;
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const statusDiv = document.getElementById('formStatus');
 
@@ -61,13 +64,26 @@ if (contactForm) {
                 statusDiv.textContent = '✅ Thank you — your details were submitted. We will contact you soon.';
                 contactForm.reset();
             } else {
-                const data = await resp.json().catch(() => ({}));
-                throw new Error(data.error || 'Form submission failed');
+                const contentType = resp.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    const data = await resp.json().catch(() => ({}));
+                    throw new Error(data.error || 'Form submission failed');
+                } else {
+                    const text = await resp.text().catch(() => '');
+                    if (/Activate Form|one step away/i.test(text)) {
+                        throw new Error('ACTIVATE_FORM_SUBMIT');
+                    }
+                    throw new Error('Form submission failed');
+                }
             }
-            } catch (err) {
-                statusDiv.className = 'form-status error';
-                statusDiv.innerHTML = '⚠️ There was a problem submitting the form. Please try again later or email us at <a href="mailto:youremail@example.com">youremail@example.com</a>.';
+        } catch (err) {
+            statusDiv.className = 'form-status error';
+            if (err.message === 'ACTIVATE_FORM_SUBMIT') {
+                statusDiv.innerHTML = '⚠️ FormSubmit requires activation. Please check your email for the activation link from FormSubmit or visit <a href="https://formsubmit.co" target="_blank">FormSubmit</a> to activate the form.';
+            } else {
+                statusDiv.innerHTML = '⚠️ There was a problem submitting the form. Please try again later or contact us at <a href="tel:+919938011913">+91 99380 11913</a>.';
                 console.error('Form submit error:', err);
+            }
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
